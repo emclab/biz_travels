@@ -328,13 +328,6 @@ module BizTravels
     end
     
     
-    def set_my_groups1(workitems)
-      @user = Authentify::User.find(session[:user_id])
-      user_all_levels_names = []    
-      @user.user_levels.each do |ul|
-        user_all_levels_names << ul.position
-      end
-  
       workitems_process_names = []    
       if not workitems.nil?
         workitems.each do |w|
