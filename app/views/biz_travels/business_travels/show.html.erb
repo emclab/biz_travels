@@ -1,0 +1,23 @@
+<div id="main_body">
+	<h2><%= t('show_business_travel') %></h2>
+	<p>
+	  <b>Requested By</b><br>
+	  <%= @business_travel.user.name %>
+	</p>
+
+	<p>
+	  <b>Purpose</b><br>
+	  <%= @business_travel.purpose %>
+	</p>
+	
+	<p>
+	  <b>State</b><br>
+	  <%= @business_travel.state %>
+	</p>
+	
+	<div class="form-actions">
+	  <%= link_to 'Back', user_business_travels_business_travel_path(@business_travel), :class => 'btn'  %>
+	  <%= link_to 'Edit', edit_business_travel_path(@business_travel), :class => 'btn btn-primary' %>
+	  <%= link_to 'Delete', business_travel_path(@business_travel), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+	</div>
+</div>

@@ -1,0 +1,78 @@
+<%= form_for @business_travel, :html => {:class => 'form-horizontal' } do |f| %>    
+ 	<fieldset>
+		<legend><%= controller.action_name.capitalize %> Business Travel</legend>
+		<div class="control-group">
+			<%= f.label :state, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :state, :class => 'text_field' %>
+			</div>
+		</div>
+			
+		<div class="control-group">
+			<%= f.label :purpose, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :purpose, :class => 'text_field'  %>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<%= f.label :from_date, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :from_date %>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<%= f.label :to_date, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :to_date %>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<%= f.label :estimated_cost, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :estimated_cost, :class => 'number_field'%>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<%= f.label :type_of_transportation, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :type_of_transportation, :class => 'text_field'%>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<%= f.label :note, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :note, :class => 'text_field'%>
+			</div>
+		</div>
+		<div class="control-group">
+			<%= f.label :customers_to_visit, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :customers_to_visit, :class => 'text_field'%>
+			</div>
+		</div>
+     
+		<div class="control-group">
+			<%= f.label :user_id, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :user_id, :class => 'text_field'%>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<%= f.label :last_updated_by_id, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :last_updated_by_id, :class => 'text_field'%>
+			</div>
+		</div>
+
+		<div <form action="form-actions">
+			<%= f.submit nil, :class =>'btn btn-primary' %> 
+			<%= link_to 'Cancel', business_travels_path, :class => 'btn' %> 
+		</div>
+ 	</fieldset>
+<% end %>  

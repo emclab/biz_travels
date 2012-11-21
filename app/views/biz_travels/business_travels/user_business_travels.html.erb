@@ -1,0 +1,35 @@
+<h2><%= t('pending_business_travels') %></h2>
+<table class="table table-striped">
+	<thead>
+  	  <tr>
+	    <th>Requested By</th>
+	    <th>Purpose</th>
+	    <th>From Date</th>
+	    <th>To Date</th>
+	    <th>Status</th>
+	    <th>Decision</th>
+	    <th>Actions</th>
+	  </tr>
+	</thead>
+	<tbody>
+		<% @business_travels.each do |btr| %>
+		  <tr>
+		    <td><%= btr.user.id %></td> 
+		    <td><%= link_to btr.purpose, business_travel_path(btr) %></td>
+		    <td><%= btr.from_date.strftime("%Y/%m/%d") %></td>
+		    <td><%= btr.to_date.strftime("%Y/%m/%d") %></td>
+		    <td><%= btr.state %></td>
+		    <td><%= btr.decision %></td> 
+		    <td>
+		    	<%= link_to 'Edit', edit_business_travel_path(btr), :class => 'btn btn-mini btn-primary'  %>
+		    	<%= link_to 'Show', business_travel_path(btr), :class => 'btn btn-mini'  %>
+		    	<%= link_to 'Destroy', business_travel_path(btr), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger'  %>
+		    </td>
+		  </tr>
+		<% end %>
+	</tbody>
+  </tr>
+</table>
+  <%= link_to 'New', new_business_travel_path, :class => 'btn btn-primary'%>
+</div>
+          

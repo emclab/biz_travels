@@ -1,0 +1,71 @@
+<div>
+		<legend><%= controller.action_name.capitalize %> Business Travel</legend>
+		<div class="control-group">
+			<%= f.label :user_id, :class => 'control-label' %>
+			<div class="controls">
+				<%= @business_travel.user.name %>
+			</div>
+		</div>
+		<div class="control-group">
+			<%= f.label :state, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :state, :class => 'text_field', :readonly => true %>
+			</div>
+		</div>
+			
+		<div class="control-group">
+			<%= f.label :purpose, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_area :purpose, :rows=>5, :cols=>40, :class => 'text_field'  %>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<%= f.label :from_date, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :from_date %>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<%= f.label :to_date, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :to_date %>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<%= f.label :estimated_cost, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :estimated_cost, :class => 'number_field'%>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<%= f.label :type_of_transportation, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :type_of_transportation, :class => 'text_field'%>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<%= f.label :note, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_area :note, :rows=>5, :cols=>40, :class => 'text_field'%>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<%= f.label :customers_to_visit, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_area :customers_to_visit, :rows=>5, :cols=>40, :class => 'text_field'%>
+			</div>
+		</div>
+     
+		<div class="control-group">
+			<%= f.label :last_updated_by_id, :class => 'control-label' %>
+			<div class="controls">
+				<%= @last_updated_by %>
+			</div>
+		</div>
+</div>

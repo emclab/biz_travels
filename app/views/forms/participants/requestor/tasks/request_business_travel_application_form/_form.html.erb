@@ -1,0 +1,11 @@
+<% @business_travel = BizTravels::BusinessTravel.find(@workitem.fields['object_id']) %>
+<%= form_for @business_travel, :url => "/biz_travels/business_travels/#{@business_travel.id}/request_travel", :html => {:class => 'form-horizontal' } do |f| %>    
+ 	<fieldset>
+ 		<%= render :partial => 'fields', :locals => { :f => f} %>
+		<div <form action="form-actions">
+			<%= f.hidden_field 'fei_id', :value => @workitem.fei.to_storage_id %>
+			<%= f.submit 'Submit Request', :class =>'btn btn-primary' %> 
+			<%= link_to 'Cancel', business_travels_path, :class => 'btn' %> 
+		</div>
+ 	</fieldset>
+<% end %>  

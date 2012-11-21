@@ -1,0 +1,26 @@
+
+<h1>WorkItems</h1>
+<table class="table table-striped">
+  <tr>
+    <th>Requestor Id</th>
+    <th>Type</th>
+    <th>Task</th>
+    <th>Id</th>
+    <th>Actions</th>
+  </tr>
+
+<% @workitems.each do |wi| %>
+  <tr>
+  	<td><%= wi.fields['requestor_id'] %></td>
+    <td><%= wi.participant_name %></td>
+    <td><%= wi.fields['params']['task'] %></td>
+    <% klass = wi.fields['object_type'].camelize.constantize %>
+    <% obj = eval("#{klass}.find(#{wi.fields['object_id']})") %>
+    <td><%= "#{klass}: #{link_to obj.name, obj}" %></td>
+    <td><%= link_to 'Show', { :controller => 'workitems', :action => :show, :id => wi.fei.to_storage_id }, :class => 'btn btn-mini'  %>
+    	|
+    	<%= link_to 'Edit', { :controller => 'workitems', :action => :edit, :id => wi.fei.to_storage_id }, :class  => 'btn btn-mini btn-danger' %></td>
+  </tr>
+<% end %>
+</table>
+          

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+   	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/ >
+  	<%= stylesheet_link_tag    "application" %>
+  	<%= javascript_include_tag "application" %>
+  	<%= csrf_meta_tags %>
+	<%= include_gon %>	
+	<script type="text/javascript">
+    	window.onload = setupRefresh;
+    	function setupRefresh()	{
+    		refreshBlock();
+        	setInterval("refreshBlock();",5000);
+    	}
+    
+	    function refreshBlock()	{
+       		$('#workitemsCount').load('/workitems/' + gon.user_id + '/user_workitems_count');
+       		var wCount = $("#workitemsCount").text();
+       		$("#workitems-count").text(wCount);
+
+    	}
+	</script>
+  
+</head>
+
+
+<body id="<%= params[:controller].parameterize %>_controller">
+		<div id="workitemsCount" style="visibility: hidden"><%= yield :wcount%></div>
+<div id="container">
+	<%= yield %>
+</div>
+
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, :id => "flash_#{name}" %>
+  <% end %>
+ 
+</body>
+</html>

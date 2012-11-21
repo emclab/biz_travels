@@ -1,0 +1,25 @@
+<div id="main_body">
+<p>
+	<h1>Show WorkItem:</h1>
+	<table class="table table-striped">
+	  <tr>
+	    <th>Requestor Id</th>
+	    <th>Type</th>
+	    <th>Task</th>
+	    <th>Id</th>
+	    <th>Created On</th>
+	  </tr>
+	
+	  <tr>
+	  	<td><%= @workitem.fields['requestor_id'] %></td>
+	    <td><%= @workitem.participant_name %></td>
+	    <td><%= @workitem.fields['params']['task'] %></td>
+	    <% klass = @workitem.fields['object_type'].camelize.constantize %>
+	    <% obj = eval("#{klass}.find(#{@workitem.fields['object_id']})") %>
+	    <td><%= "#{klass}: #{link_to obj.name, obj}" %></td>
+	  	<td><%= @workitem.fields['dispatched_at'] %></td>
+	  </tr>
+	</table>
+</p>
+</div>
+                

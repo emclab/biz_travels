@@ -1,0 +1,12 @@
+<div id="main_body">
+	<h2><%= t('new_business_travel') %></h2>
+	<%= form_for @business_travel, :html => {:class => 'form-horizontal' } do |f| %>    
+	 	<fieldset>
+	 		<%= render :partial => 'fields', :locals => { :f => f} %>
+			<div <form action="form-actions">
+				<%= f.submit nil, :class =>'btn btn-primary' %> 
+				<%= link_to 'Cancel', business_travels_path, :class => 'btn' %> 
+			</div>
+	 	</fieldset>
+	<% end %>  
+</div>
