@@ -328,24 +328,6 @@ module BizTravels
     end
     
     
-      workitems_process_names = []    
-      if not workitems.nil?
-        workitems.each do |w|
-          workitems_process_names << w.wf_name 
-        end  
-      end
-      ulgm =  Authentify::UserLevelGroupMap.where("level = ? AND module_name IN (?)", user_all_levels_names, workitems_process_names)
-      groups = []
-      if not ulgm.nil?
-        ulgm.each do |u|
-          groups << u.group_name  
-        end
-      end  
-      session[:mygroups] = groups
-      return groups
-    end
-  
-    
     def delay_for_workitems(wfid)
       300.times do 
         sleep 0.010 # 3 seconds max 
