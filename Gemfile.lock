@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: http://github.com/emclab/authentify.git
-  revision: 96f31de0ac3cecac12f2ee1a6bc08fbe6f67500e
+  revision: dc8bff0f4ab45be09bcd2a1d6d7d722c7b91f5c3
   specs:
     authentify (0.0.1)
       bcrypt-ruby

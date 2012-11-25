@@ -59,7 +59,7 @@ describe BizTravels::BusinessTravelsController do
       user_group = FactoryGirl.create(:sys_user_group, :user_group_name => 'admin')
       ul = FactoryGirl.create(:user_level, :user_id => 1, :sys_user_group_id => user_group.id)
       u = FactoryGirl.create(:user, :user_levels => [ul])
-      session[:user_privilege] = Authentify::UserPrivilege.new(u.id)    
+      session[:user_privilege] = Authentify::UserPrivilegeHelper::UserPrivilege.new(u.id)    
       b = FactoryGirl.create(:business_travel) 
       get 'index'
       response.should render_template :index
