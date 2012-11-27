@@ -34,6 +34,15 @@ require 'state_machine'
 module BizTravels
   class Engine < ::Rails::Engine
     isolate_namespace BizTravels
+    
+    config.generators do |g|
+          g.template_engine :erb
+          g.integration_tool :rspec
+          g.test_framework :rspec
+          g.fixture_replacement :factory_girl, :dir => "spec/factories"
+    end    
+    
+    
     initializer "BizTravel precompile hook", :group => :all do |app|
       app.config.assets.precompile += [
         'biz_travels/application.css.scss', 'biz_travels/layout.css.scss', 'biz_travels/login.css.scss', 
