@@ -1,6 +1,6 @@
 BizTravels::Engine.routes.draw do
 
-  mount Authentify::Engine => "/authentify", :as => "authentify_engine"
+  #mount Authentify::Engine => "/authentify", :as => "authentify_engine"
   
   ########### START: Added this for rspec testing
   match '/user_menus', :to => 'authentify/user_menus#index'
