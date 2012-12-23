@@ -1,3 +1,4 @@
+# This migration comes from authentify (originally 20121008012839)
 class CreateSysUserRights < ActiveRecord::Migration
   def change
     create_table :authentify_sys_user_rights do |t|

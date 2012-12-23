@@ -1,3 +1,4 @@
+# This migration comes from authentify (originally 20120527172454)
 class CreateSysLogs < ActiveRecord::Migration
   def change
     create_table :authentify_sys_logs do |t|

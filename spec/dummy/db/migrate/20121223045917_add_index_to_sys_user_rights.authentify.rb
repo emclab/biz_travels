@@ -1,3 +1,4 @@
+# This migration comes from authentify (originally 20121030153035)
 class AddIndexToSysUserRights < ActiveRecord::Migration
   def change
     change_table :authentify_sys_user_rights do |t|

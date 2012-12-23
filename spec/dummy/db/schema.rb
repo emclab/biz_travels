@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121111190724) do
+ActiveRecord::Schema.define(:version => 20121223045918) do
 
   create_table "authentify_sessions", :force => true do |t|
     t.string   "session_id", :null => false
@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(:version => 20121111190724) do
   create_table "authentify_sys_user_groups", :force => true do |t|
     t.string   "user_group_name"
     t.string   "short_note"
+    t.integer  "user_type_code"
+    t.string   "user_type_desp"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
@@ -89,18 +91,21 @@ ActiveRecord::Schema.define(:version => 20121111190724) do
     t.string   "login"
     t.string   "encrypted_password"
     t.string   "salt"
-    t.string   "status",             :default => "active"
+    t.string   "status",                 :default => "active"
     t.integer  "last_updated_by_id"
     t.integer  "customer_id"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.string   "auth_token"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
   end
 
   create_table "biz_travels_business_travels", :force => true do |t|
     t.integer  "user_id"
     t.string   "state"
-    t.datetime "from_date"
-    t.datetime "to_date"
+    t.date     "from_date"
+    t.date     "to_date"
     t.text     "purpose"
     t.decimal  "estimated_cost"
     t.string   "type_of_transportation"
@@ -108,7 +113,7 @@ ActiveRecord::Schema.define(:version => 20121111190724) do
     t.text     "customers_to_visit"
     t.text     "note"
     t.string   "decision"
-    t.datetime "review_date"
+    t.date     "review_date"
     t.text     "travel_summary"
     t.integer  "last_updated_by_id"
     t.string   "wfid"

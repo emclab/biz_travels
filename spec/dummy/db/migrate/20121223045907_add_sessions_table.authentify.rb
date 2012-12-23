@@ -1,3 +1,4 @@
+# This migration comes from authentify (originally 20120425220924)
 class AddSessionsTable < ActiveRecord::Migration
   def up
     create_table :authentify_sessions do |t|
