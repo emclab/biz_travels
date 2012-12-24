@@ -4,8 +4,8 @@ class CreateBizTravelBusinessTravels < ActiveRecord::Migration
     create_table :biz_travels_business_travels do |t|
       t.integer :user_id
       t.string :state
-      t.date :from_date
-      t.date :to_date
+      t.datetime :from_date
+      t.datetime :to_date
       t.text :purpose
       t.decimal :estimated_cost
       t.string :type_of_transportation
@@ -13,7 +13,7 @@ class CreateBizTravelBusinessTravels < ActiveRecord::Migration
       t.text :customers_to_visit
       t.text :note
       t.string :decision
-      t.date :review_date
+      t.datetime :review_date
       t.text :travel_summary
       t.integer :last_updated_by_id
       t.string :wfid
