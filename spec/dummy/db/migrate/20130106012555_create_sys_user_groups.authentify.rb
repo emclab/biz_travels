@@ -6,6 +6,8 @@ class CreateSysUserGroups < ActiveRecord::Migration
       t.string :short_note
       t.integer :user_type_code  # 1 - employee, 2 - customer, etc
       t.string :user_type_desp   #employee, customer, etc.
+      #t.string :zone    #user location. ex, hq - head quarter.
+        
       t.timestamps
     end
   end
