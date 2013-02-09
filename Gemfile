@@ -5,7 +5,7 @@ gem 'authentify', :git => 'http://github.com/emclab/authentify.git'
 #gem 'authentify' , :path => '../authentify'
 
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.11'
 gem 'sqlite3'  
 gem 'database_cleaner'
 gem 'jquery-rails' #, "2.0.0"
