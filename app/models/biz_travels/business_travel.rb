@@ -1,4 +1,4 @@
-  # encoding: utf-8
+cd   # encoding: utf-8
 module BizTravels  
   class BusinessTravel < ActiveRecord::Base
     belongs_to :user, :class_name => "Authentify::User"
