@@ -25,8 +25,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'will_paginate', '~> 3.0'
   s.add_dependency 'jquery-rails' #, '~>2.0.0'
   s.add_dependency "database_cleaner"
-  s.add_dependency "rufus-scheduler"
-  s.add_dependency "gon"
+  #s.add_dependency "rufus-scheduler"
+  #s.add_dependency "gon"
   s.add_dependency 'execjs'
   
   #s.add_dependency 'therubyracer'
@@ -34,6 +34,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'coffee-rails', '~> 3.2.1'
   s.add_dependency 'uglifier', '>= 1.0.3'
   s.add_dependency 'bootstrap-sass', '~> 2.3.1.0'
+  #s.add_dependency 'bootstrap-sass', '~> 2.0.4.0'
   s.add_dependency 'yajl-ruby' #, :require => 'yajl'
   s.add_dependency 'ruote-sequel'
   

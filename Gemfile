@@ -13,6 +13,23 @@ gem 'simple_form'
 gem 'will_paginate'
 #gem 'rufus-scheduler'
 #gem 'gon'
+#gem 'authentify', :git => 'http://github.com/emclab/authentify.git'
+gem 'authentify' , :path => '../authentify'
+#gem 'ruote-kit', '2.1.11'
+gem 'ruote', :git => 'http://github.com/jmettraux/ruote.git'
+#gem 'ruote-kit', :git => 'http://github.com/tosch/ruote-kit.git'
+gem 'ruote-kit', :git => 'git://github.com/kennethkalmer/ruote-kit.git'
+
+#gem 'rails', '3.2.11'
+#gem 'sqlite3'  
+#gem 'database_cleaner'
+gem 'jquery-rails' #, "2.0.0"
+#gem 'simple_form'
+gem 'will_paginate', '~> 3.0'
+#gem 'rufus-scheduler'
+#gem 'gon'
+#gem 'ruote', :git => 'http://github.com/jmettraux/ruote.git'
+#gem 'ruote-kit', :git => 'http://github.com/tosch/ruote-kit.git'
 
 #gem 'ruote-kit', :git => 'git://github.com/kennethkalmer/ruote-kit.git'
 gem 'ruote', :git => 'http://github.com/jmettraux/ruote.git'
@@ -49,12 +66,25 @@ gem "thin", "1.3.1"
 gem "eventmachine", "1.0.0.beta.4.1"
 
 
-gem 'haml-rails'
+# Rails
+#
+#gem 'rails', '3.0.10'
+#gem 'sqlite3-ruby', :require => 'sqlite3'
 
-gem 'sinatra', '~>1.2'
-gem 'sinatra-respond_to'
+# web server
+#
+#gem 'unicorn'
 
-gem 'yajl-ruby', :require => 'yajl'
+#gem "thin", "1.3.1"
+#gem "eventmachine", "1.0.0.beta.4.1"
+
+
+#gem 'haml-rails'
+
+#gem 'sinatra', '~>1.2'
+#gem 'sinatra-respond_to'
+
+#gem 'yajl-ruby', :require => 'yajl'
 
 
 
@@ -64,10 +94,10 @@ gem 'yajl-ruby', :require => 'yajl'
 
 
 
-gem 'bcrypt-ruby'
+#gem 'bcrypt-ruby'
   # for app/models/user.rb
 
-gem 'state_machine'
+#gem 'state_machine'
 #gem 'paperclip'
 
 # -----------------------------------
