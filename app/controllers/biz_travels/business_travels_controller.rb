@@ -1,7 +1,9 @@
 module BizTravels
 
   class BusinessTravelsController < ApplicationController
-  
+    include Authentify::AuthentifyUtility
+    include Commonx::CommonxHelper
+
     def index
       @business_travels = pending_business_travels
       #respond_to do |format|
@@ -34,10 +36,11 @@ module BizTravels
     def edit
       @business_travel = BusinessTravel.find(params[:id])
       @last_updated_by = Authentify::User.find(@business_travel.last_updated_by_id).name
-      @workitems = RuoteKit.storage_participant.all
+      @workitems = RUOTE.storage_participant.all
       @workitems.keep_if {|wi| wi.fields['object_id'] == @business_travel.id }
       @workitem = @workitems.first
       @user_id = @business_travel.user.id.to_s()
+      @erb_code = find_ruote_config_for("#{@workitem.fields['params']['task']}", params[:controller].camelize.deconstantize.tableize.singularize.downcase)
     end
   
     def create
@@ -48,12 +51,12 @@ module BizTravels
   
       respond_to do |format|
         if @business_travel.save
-          @wfid = @business_travel.ruote_create_business_travel
+          #@wfid = @business_travel.ruote_create_business_travel
+          @business_travel.wfid = ruote_create_business_travel(@business_travel)
+          @business_travel.save
+          @wfid = @business_travel.wfid
           delay_for_workitems(@wfid)
           flash[:notice] = 'Business travel was successfully created.'
-          #format.html { redirect_to user_business_travels_business_travel_path, :id => session[:user_id] }
-          #format.xml  { head :ok }
-          #format.html { redirect_to(@business_travel) }
           format.html { redirect_to business_travels_path }
           format.xml  { render :xml => business_travels_path, :status => :created, :location => @business_travel }
         else
@@ -62,16 +65,28 @@ module BizTravels
         end
       end
     end
-  
+
+    def ruote_create_business_travel(business_travel)
+      engineName =  params[:controller].camelize.deconstantize.tableize.singularize.downcase
+      process_definition = find_ruote_config_for('process_definition',engineName)
+      logger.debug("pdef = #{process_definition}")
+      #wfid = RUOTE.launch(process_definition, initial_workitem_fields={:object_type => :business_travel, :object_id => business_travel.id, :requestor_id => business_travel.user.id }, process_variables={'amount_supervised' => '0.01'})
+      workitem_fields = find_ruote_config_for('initial_workitem_fields', engineName)
+      process_variables = find_ruote_config_for('process_variables', engineName)
+      wfid = RUOTE.launch(process_definition, initial_workitem_fields=eval(workitem_fields), process_variables=eval(process_variables))
+      logger.debug("=====> wfid=#{wfid}")
+      return wfid
+    end
+
     def update
       @business_travel = BusinessTravel.find(params[:id])
       if ( fei = Ruote::FlowExpressionId.from_id(params[:business_travel][:fei_id]) )
-        workitem = RuoteKit.storage_participant[fei]
+        workitem = RUOTE.storage_participant[fei]
       end
   
       respond_to do |format|
         if @business_travel.update_attributes(params[:business_travel])
-          RuoteKit.storage_participant.proceed(workitem)
+          RUOTE.storage_participant.proceed(workitem)
           flash[:notice] = 'Business travel was successfully updated.'
           #format.html { redirect_to(@business_travel) }
           format.html { redirect_to user_business_travels_business_travel_path, :id => session[:user_id] }
@@ -86,10 +101,10 @@ module BizTravels
     def destroy
       @business_travel = BusinessTravel.find(params[:id])
       if @business_travel.destroy
-        @workitems = RuoteKit.storage_participant.all
+        @workitems = RUOTE.storage_participant.all
         @workitems.keep_if {|wi| wi.fields['object_id'] == @business_travel.id }
         @workitem = @workitems.first
-        RuoteKit.engine.cancel_process(@workitem.wfid)
+        RUOTE.engine.cancel_process(@workitem.wfid)
           respond_to do |format|
             format.html { redirect_to :action => "user_business_travels", :id => session[:user_id] }
             flash[:notice] = 'Business travel/workitem was successfully deleted.'
@@ -105,14 +120,14 @@ module BizTravels
       @last_updated_by = @updated_by.name
       if @business_travel.update_attributes(params[:business_travel])
         if ( fei = Ruote::FlowExpressionId.from_id(params[:business_travel][:fei_id]) )
-          workitem = RuoteKit.storage_participant[fei]
+          workitem = RUOTE.storage_participant[fei]
         end
         
         workitem.fields['requested_stipend'] = @business_travel.estimated_cost
         if @business_travel.submit_request
           workitem.fields.delete('request_form_not_ok')
           workitem.fields.delete('travel_rejected')
-          RuoteKit.storage_participant.proceed(workitem)
+          RUOTE.storage_participant.proceed(workitem)
         end
         
         respond_to do |format|
@@ -139,13 +154,13 @@ module BizTravels
       @last_updated_by = @updated_by.name
       
       if ( fei = Ruote::FlowExpressionId.from_id(params[:business_travel][:fei_id]) )
-        workitem = RuoteKit.storage_participant[fei]
+        workitem = RUOTE.storage_participant[fei]
       end
       if @business_travel.update_attributes(params[:business_travel])
         if @business_travel.approve_travel
           workitem.fields.delete('request_form_not_ok')
           workitem.fields.delete('travel_rejected')
-          RuoteKit.storage_participant.proceed(workitem)
+          RUOTE.storage_participant.proceed(workitem)
         end
         respond_to do |format|
           format.html { redirect_to business_travels_path }
@@ -160,7 +175,7 @@ module BizTravels
       @last_updated_by = @updated_by.name
   
       if ( fei = Ruote::FlowExpressionId.from_id(params[:business_travel][:fei_id]) )
-        workitem = RuoteKit.storage_participant[fei]
+        workitem = RUOTE.storage_participant[fei]
       end
       
       if (workitem.participant_name == 'ceo')
@@ -170,7 +185,7 @@ module BizTravels
       workitem.fields['travel_rejected'] = true
       if @business_travel.update_attributes(params[:business_travel])
         if @business_travel.reject_travel
-          RuoteKit.storage_participant.proceed(workitem)
+          RUOTE.storage_participant.proceed(workitem)
         end
         
         respond_to do |format|
@@ -186,7 +201,7 @@ module BizTravels
       @last_updated_by = @updated_by.name
   
       if ( fei = Ruote::FlowExpressionId.from_id(params[:business_travel][:fei_id]) )
-        workitem = RuoteKit.storage_participant[fei]
+        workitem = RUOTE.storage_participant[fei]
       end
   
       workitem.fields['request_form_not_ok'] = true
@@ -194,7 +209,7 @@ module BizTravels
       respond_to do |format|
         if @business_travel.update_attributes(params[:business_travel])
           if @business_travel.request_not_ok
-            RuoteKit.storage_participant.proceed(workitem)
+            RUOTE.storage_participant.proceed(workitem)
             flash[:notice] = 'Business travel was successfully updated.'
           end  
           format.html { redirect_to business_travels_path }
@@ -214,12 +229,12 @@ module BizTravels
   
       if @business_travel.update_attributes(params[:business_travel])
         if ( fei = Ruote::FlowExpressionId.from_id(params[:business_travel][:fei_id]) )
-          workitem = RuoteKit.storage_participant[fei]
+          workitem = RUOTE.storage_participant[fei]
         end
     
         if @business_travel.submit_report
           workitem.fields.delete('incomplete_report')
-          RuoteKit.storage_participant.proceed(workitem)
+          RUOTE.storage_participant.proceed(workitem)
         end
         
         respond_to do |format|
@@ -243,11 +258,11 @@ module BizTravels
       @last_updated_by = @updated_by.name
   
       if ( fei = Ruote::FlowExpressionId.from_id(params[:business_travel][:fei_id]) )
-        workitem = RuoteKit.storage_participant[fei]
+        workitem = RUOTE.storage_participant[fei]
       end
       if @business_travel.update_attributes(params[:business_travel])
         if @business_travel.approve_report
-          RuoteKit.storage_participant.proceed(workitem)
+          RUOTE.storage_participant.proceed(workitem)
         end
         
         respond_to do |format|
@@ -263,12 +278,12 @@ module BizTravels
       @last_updated_by = @updated_by.name
   
       if ( fei = Ruote::FlowExpressionId.from_id(params[:business_travel][:fei_id]) )
-        workitem = RuoteKit.storage_participant[fei]
+        workitem = RUOTE.storage_participant[fei]
       end
       if @business_travel.update_attributes(params[:business_travel])
         if @business_travel.reject_report
           workitem.fields['incomplete_report'] = true
-          RuoteKit.storage_participant.proceed(workitem)
+          RUOTE.storage_participant.proceed(workitem)
         end
         
         respond_to do |format|
@@ -291,7 +306,7 @@ module BizTravels
   
   
     def pending_business_travels
-      @workitems = RuoteKit.storage_participant.all
+      @workitems = RUOTE.storage_participant.all
       mygroups = session[:mygroups]
       if mygroups.nil?
         mygroups = set_my_groups(@workitems)
@@ -356,11 +371,14 @@ module BizTravels
     def delay_for_workitems(wfid)
       300.times do 
         sleep 0.010 # 3 seconds max 
-        @workitems = RuoteKit.storage_participant.all 
+        @workitems = RUOTE.storage_participant.all 
         break if @workitems.find { |wi| wi.wfid == wfid } 
       end 
     end
   
   end
+  
+
+  
   
 end

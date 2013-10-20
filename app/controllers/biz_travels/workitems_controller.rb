@@ -3,24 +3,24 @@ module BizTravels
 
   class WorkitemsController < ApplicationController
     def index
-      @workitems = RuoteKit.storage_participant.all
+      @workitems = RUOTE.storage_participant.all
       @user_id = session[:user_id].to_s()
     end
   
     def show
       if ( fei = Ruote::FlowExpressionId.from_id(params[:id]) )
-        @workitem = RuoteKit.storage_participant[fei]
+        @workitem = RUOTE.storage_participant[fei]
       end
     end
   
     def edit
       if ( fei = Ruote::FlowExpressionId.from_id(params[:id]) )
-        @workitem = RuoteKit.storage_participant[fei]
+        @workitem = RUOTE.storage_participant[fei]
       end
     end
   
     def user_workitems
-      @workitems = RuoteKit.storage_participant.all
+      @workitems = RUOTE.storage_participant.all
       mygroups = session[:mygroups]
       if mygroups.nil?
         mygroups = set_my_groups(@workitems)

@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "3.2.11"
+  s.add_dependency "rails", "3.2.12"
   s.add_dependency "sqlite3"
   s.add_dependency "database_cleaner"
 
@@ -33,8 +33,9 @@ Gem::Specification.new do |s|
   s.add_dependency 'sass-rails',   '~> 3.2.3'
   s.add_dependency 'coffee-rails', '~> 3.2.1'
   s.add_dependency 'uglifier', '>= 1.0.3'
-  s.add_dependency 'bootstrap-sass', '~> 2.0.4.0'
+  s.add_dependency 'bootstrap-sass', '~> 2.3.1.0'
   s.add_dependency 'yajl-ruby' #, :require => 'yajl'
+  s.add_dependency 'ruote-sequel'
   
   s.add_dependency "thin", "1.3.1"
   s.add_dependency "eventmachine", "1.0.0.beta.4.1"
@@ -43,12 +44,13 @@ Gem::Specification.new do |s|
   s.add_dependency 'sinatra', '~>1.2'
   s.add_dependency 'sinatra-respond_to'
   s.add_dependency 'ruote' #, '~>2.3.0'  #:git => 'http://github.com/jmettraux/ruote.git'
-  s.add_dependency 'ruote-kit' #, '~>2.3.0'  # :git => 'http://github.com/tosch/ruote-kit.git'
+  #s.add_dependency 'ruote-kit' #, '~>2.3.0'  # :git => 'http://github.com/tosch/ruote-kit.git'
   s.add_dependency 'bcrypt-ruby'
   s.add_dependency 'state_machine'
 
 
   s.add_development_dependency "authentify"
+  s.add_development_dependency "commonx"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency 'factory_girl_rails', '~> 3.0'
 

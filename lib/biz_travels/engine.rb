@@ -26,7 +26,7 @@ require 'haml-rails'
 require 'sinatra'
 #require 'sinatra-respond_to'
 require 'ruote' #, :git => 'http://github.com/jmettraux/ruote.git'
-require 'ruote-kit' #, :git => 'http://github.com/tosch/ruote-kit.git'
+#require 'ruote-kit' #, :git => 'http://github.com/tosch/ruote-kit.git'
 #require 'bcrypt-ruby'
 require 'state_machine'
 

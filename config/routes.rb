@@ -8,8 +8,8 @@ BizTravels::Engine.routes.draw do
   match '/signout', :to => 'authentify/sessions#destroy'
   ########### END:  Added this for rspec testing
 
-  match '/_ruote' => RuoteKit::Application
-  match '/_ruote/*path' => RuoteKit::Application
+  #match '/_ruote' => RuoteKit::Application
+  #match '/_ruote/*path' => RuoteKit::Application
 
   #---- workitems list
   root :to => 'businessTravels#index'
