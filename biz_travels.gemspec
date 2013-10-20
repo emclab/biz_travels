@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-rails' #, '~>2.0.0'
   s.add_dependency "database_cleaner"
   #s.add_dependency "rufus-scheduler"
-  #s.add_dependency "gon"
+  s.add_dependency "gon"
   s.add_dependency 'execjs'
   
   #s.add_dependency 'therubyracer'

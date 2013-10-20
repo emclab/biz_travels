@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gemspec
 gem 'authentify' , :path => '../authentify'
 gem 'commonx' , :path => '../commonx'
-#gem 'authentify', :git => 'http://github.com/emclab/authentify.git'
 
 
 gem 'rails', '3.2.12'
@@ -11,28 +10,14 @@ gem 'sqlite3'
 gem 'database_cleaner'
 gem 'simple_form'
 gem 'will_paginate'
+
 #gem 'rufus-scheduler'
-#gem 'gon'
-#gem 'authentify', :git => 'http://github.com/emclab/authentify.git'
-gem 'authentify' , :path => '../authentify'
-#gem 'ruote-kit', '2.1.11'
+gem 'gon'
 gem 'ruote', :git => 'http://github.com/jmettraux/ruote.git'
-#gem 'ruote-kit', :git => 'http://github.com/tosch/ruote-kit.git'
 gem 'ruote-kit', :git => 'git://github.com/kennethkalmer/ruote-kit.git'
 
-#gem 'rails', '3.2.11'
-#gem 'sqlite3'  
-#gem 'database_cleaner'
 gem 'jquery-rails' #, "2.0.0"
-#gem 'simple_form'
 gem 'will_paginate', '~> 3.0'
-#gem 'rufus-scheduler'
-#gem 'gon'
-#gem 'ruote', :git => 'http://github.com/jmettraux/ruote.git'
-#gem 'ruote-kit', :git => 'http://github.com/tosch/ruote-kit.git'
-
-#gem 'ruote-kit', :git => 'git://github.com/kennethkalmer/ruote-kit.git'
-gem 'ruote', :git => 'http://github.com/jmettraux/ruote.git'
 gem 'jason'  #for ruote storage
 gem 'ruote-sequel'   #for ruote storage
 gem 'yajl-ruby'
