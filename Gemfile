@@ -9,7 +9,7 @@ gem 'rails', '3.2.12'
 gem 'sqlite3'  
 gem 'database_cleaner'
 gem 'simple_form'
-gem 'will_paginate'
+#gem 'will_paginate'
 
 #gem 'rufus-scheduler'
 gem 'gon'
