@@ -1,16 +1,22 @@
 source 'https://rubygems.org'
 
 gemspec
+
+
+gem 'jquery-rails' #, "2.0.0"
+gem 'will_paginate'  #, '~> 3.0'
+
 gem 'authentify' , :path => '../authentify'
 gem 'commonx' , :path => '../commonx'
 
 
-gem 'rails', '3.2.12'
-gem 'sqlite3'  
-gem 'database_cleaner'
-gem 'simple_form'
+#gem 'rails', '3.2.12'
+#gem 'sqlite3'  
+#gem 'database_cleaner'
+#gem 'simple_form'
 #gem 'will_paginate'
 
+=begin
 #gem 'rufus-scheduler'
 gem 'gon'
 gem 'ruote', :git => 'http://github.com/jmettraux/ruote.git'
@@ -77,7 +83,7 @@ gem "eventmachine", "1.0.0.beta.4.1"
 #gem "ruote-amqp", "~> 2.2.0", :git => 'https://github.com/kennethkalmer/ruote-amqp'
 #gem "ruote-redis", "~> 2.3.0", :git => 'https://github.com/jmettraux/ruote-redis.git'
 
-
+=end
 
 #gem 'bcrypt-ruby'
   # for app/models/user.rb
