@@ -50,8 +50,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'state_machine'
 
 
-  s.add_development_dependency "authentify"
-  s.add_development_dependency "commonx"
+  #s.add_development_dependency "authentify"
+ # s.add_development_dependency "commonx"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency 'factory_girl_rails', '~> 3.0'
 

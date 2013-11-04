@@ -7,7 +7,7 @@ require 'ruote-sequel' # gem install ruote-sequel
 # set up ruote storage
 sequel = Sequel.connect('sqlite://db/development.sqlite3') if Rails.env.development?
 sequel = Sequel.connect('sqlite://db/test.sqlite3') if Rails.env.test?
-sequel = Sequel.connect('sqlite://db/ruote_in_rail.sqlite3') if Rails.env.production?
+sequel = Sequel.connect('sqlite://db/production.sqlite3') if Rails.env.production?
 #sequel = Sequel.connect('sqlite://db/ruote.sqlite3')
 
 #ruote_docs is hte table name
