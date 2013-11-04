@@ -48,14 +48,19 @@ module BizTravels
       @business_travel.user = Authentify::User.find(session[:user_id])
       @business_travel.last_updated_by_id = @business_travel.user.id
       @last_updated_by = @business_travel.user.name
-  
+      logger.info("create biz_travel 1")  
       respond_to do |format|
-        if @business_travel.save
+        if @business_travel.save!
+          logger.info("create biz_travel 2")  
           #@wfid = @business_travel.ruote_create_business_travel
           @business_travel.wfid = ruote_create_business_travel(@business_travel)
-          @business_travel.save
+          logger.info("create biz_travel 3")  
+          @business_travel.save!
+          logger.info("create biz_travel 4")  
           @wfid = @business_travel.wfid
+          logger.info("create biz_travel 5")  
           delay_for_workitems(@wfid)
+          logger.info("create biz_travel 6")  
           flash[:notice] = 'Business travel was successfully created.'
           format.html { redirect_to business_travels_path }
           format.xml  { render :xml => business_travels_path, :status => :created, :location => @business_travel }
