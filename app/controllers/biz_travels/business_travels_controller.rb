@@ -74,12 +74,12 @@ module BizTravels
     def ruote_create_business_travel(business_travel)
       engineName =  params[:controller].camelize.deconstantize.tableize.singularize.downcase
       process_definition = find_ruote_config_for('process_definition',engineName)
-      logger.debug("pdef = #{process_definition}")
+      logger.info("pdef = #{process_definition}")
       #wfid = RUOTE.launch(process_definition, initial_workitem_fields={:object_type => :business_travel, :object_id => business_travel.id, :requestor_id => business_travel.user.id }, process_variables={'amount_supervised' => '0.01'})
       workitem_fields = find_ruote_config_for('initial_workitem_fields', engineName)
       process_variables = find_ruote_config_for('process_variables', engineName)
       wfid = RUOTE.launch(process_definition, initial_workitem_fields=eval(workitem_fields), process_variables=eval(process_variables))
-      logger.debug("=====> wfid=#{wfid}")
+      logger.info("=====> wfid=#{wfid}")
       return wfid
     end
 
