@@ -314,7 +314,8 @@ module BizTravels
       @workitems = RUOTE.storage_participant.all
       mygroups = session[:mygroups]
       if mygroups.nil?
-        mygroups = set_my_groups(@workitems)
+        #mygroups = set_my_groups(@workitems)
+        mygroups = set_my_groups(params['controller'].split('/')[-1])
       end
       @workitems.keep_if {|wi| session[:user_id] == wi.fields['requestor_id'] and wi.participant_name == 'requestor' or mygroups.include? wi.participant_name }
       ids = []
@@ -331,7 +332,8 @@ module BizTravels
       @count =  @workitems.nil? ? 0 : @workitems.length
       render :layout => 'workitems_count'
     end
-  
+
+=begin
     def set_my_groups(workitems)
       workitems_process_names = []    
       if not workitems.nil?
@@ -346,7 +348,15 @@ module BizTravels
       session[:mygroups] = groups
       return groups
     end
-    
+=end
+    def set_my_groups(moduleName)
+      @user = Authentify::User.find(session[:user_id])
+      up = session[:user_privilege]
+      groups = up.find_user_module_groups(moduleName)
+      session[:mygroups] = groups
+      return groups
+    end
+
     
     def set_my_groups1(workitems)
       @user = Authentify::User.find(session[:user_id])
